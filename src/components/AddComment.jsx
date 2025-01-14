@@ -25,7 +25,8 @@ const AddComment = ({ asin }) => {
           body: JSON.stringify(comment),
           headers: {
             "Content-type": "application/json",
-            Authorization: "Bearer inserisci-qui-il-tuo-token",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2OTZjMDBmZTRlMjAwMTU2Njg4NTkiLCJpYXQiOjE3MzY4NzM2NjQsImV4cCI6MTczODA4MzI2NH0.6DZ6kFWEkB66L50h8QC5ca2X2eAxXwL2R2-CTVmxnRk",
           },
         }
       );
