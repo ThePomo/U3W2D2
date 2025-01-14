@@ -8,13 +8,14 @@ const SingleComment = ({ comment }) => {
         {
           method: "DELETE",
           headers: {
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2OTZjMDBmZTRlMjAwMTU2Njg4NTkiLCJpYXQiOjE3MzY4NzM2NjQsImV4cCI6MTczODA4MzI2NH0.6DZ6kFWEkB66L50h8QC5ca2X2eAxXwL2R2-CTVmxnRk",
+            "Content-type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2ZWFiNTBmZTRlMjAwMTU2Njg4NWEiLCJpYXQiOjE3MzY4OTUxNTcsImV4cCI6MTczODEwNDc1N30.RRNb5kI4DxJhWsg0gqJqpjoX8SJecanJtuaJHtaUfKo`,
           },
         }
       );
+
       if (response.ok) {
-        alert("La recensione è stata elimata!");
+        alert("La recensione è stata eliminata!");
       } else {
         throw new Error("La recensione non è stata eliminata!");
       }
@@ -24,12 +25,12 @@ const SingleComment = ({ comment }) => {
   };
 
   return (
-    <ListGroup.Item>
-      {comment.comment}
+    <ListGroup.Item className="d-flex justify-content-between align-items-center">
+      <span>{comment.comment}</span>
       <Button
         variant="danger"
         className="ms-2"
-        onClick={() => deleteComment(comment._id)}
+        onClick={() => deleteComment(comment._id || comment.asin)}
       >
         Elimina
       </Button>

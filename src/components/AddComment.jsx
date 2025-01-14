@@ -17,6 +17,14 @@ const AddComment = ({ asin }) => {
 
   const sendComment = async (e) => {
     e.preventDefault();
+
+    if (!comment.elementId) {
+      alert("ID del libro mancante!");
+      return;
+    }
+
+    console.log("Payload inviato:", comment);
+
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments",
@@ -25,11 +33,11 @@ const AddComment = ({ asin }) => {
           body: JSON.stringify(comment),
           headers: {
             "Content-type": "application/json",
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2OTZjMDBmZTRlMjAwMTU2Njg4NTkiLCJpYXQiOjE3MzY4NzM2NjQsImV4cCI6MTczODA4MzI2NH0.6DZ6kFWEkB66L50h8QC5ca2X2eAxXwL2R2-CTVmxnRk",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2ZWFiNTBmZTRlMjAwMTU2Njg4NWEiLCJpYXQiOjE3MzY4OTUxNTcsImV4cCI6MTczODEwNDc1N30.RRNb5kI4DxJhWsg0gqJqpjoX8SJecanJtuaJHtaUfKo`,
           },
         }
       );
+
       if (response.ok) {
         alert("Recensione inviata!");
         setComment({
@@ -70,7 +78,7 @@ const AddComment = ({ asin }) => {
             onChange={(e) =>
               setComment((prevComment) => ({
                 ...prevComment,
-                rate: e.target.value,
+                rate: parseInt(e.target.value),
               }))
             }
           >

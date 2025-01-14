@@ -15,33 +15,32 @@ const CommentArea = ({ asin }) => {
       setIsLoading(true);
       try {
         let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/comments/" + asin,
+          `https://striveschool-api.herokuapp.com/api/comments/${asin}`,
           {
             headers: {
-              Authorization:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2OTZjMDBmZTRlMjAwMTU2Njg4NTkiLCJpYXQiOjE3MzY4NzM2NjQsImV4cCI6MTczODA4MzI2NH0.6DZ6kFWEkB66L50h8QC5ca2X2eAxXwL2R2-CTVmxnRk",
+              "Content-type": "application/json",
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg2ZWFiNTBmZTRlMjAwMTU2Njg4NWEiLCJpYXQiOjE3MzY4OTUxNTcsImV4cCI6MTczODEwNDc1N30.RRNb5kI4DxJhWsg0gqJqpjoX8SJecanJtuaJHtaUfKo`,
             },
           }
         );
+
         if (response.ok) {
-          let commentsData = await response.json();
-          setComments(commentsData);
-          setIsLoading(false);
+          let comments = await response.json();
+          setComments(comments);
           setIsError(false);
         } else {
-          setIsLoading(false);
           setIsError(true);
         }
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
         setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchComments();
   }, [asin]);
-
   return (
     <div className="text-center">
       {isLoading && <Loading />}
