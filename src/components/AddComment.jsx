@@ -24,6 +24,7 @@ const AddComment = ({ asin }) => {
     }
 
     console.log("Payload inviato:", comment);
+    console.log("ciao");
 
     try {
       let response = await fetch(
